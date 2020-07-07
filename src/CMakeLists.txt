@@ -167,6 +167,6 @@ set_property(TARGET libgdiplus
 add_custom_command(
 	TARGET libgdiplus
 	PRE_BUILD
-	COMMAND powershell.exe -NonInteractive -Command "(Get-Content \"$(ProjectDir)\\..\\winconfig.h.in\") -replace '#LIBGDIPLUS_VERSION#', (Select-String -path \"$(ProjectDir)\\..\\configure.ac\" -pattern 'AC_INIT\\(libgdiplus, \\[(.*)\\]').Matches[0].Groups[1].Value | Set-Content \"$(ProjectDir)\\..\\config.h\""
+	COMMAND powershell.exe -NonInteractive -Command "(Get-Content \"${PROJECT_SOURCE_DIR}\\..\\winconfig.h.in\") -replace '#LIBGDIPLUS_VERSION#', (Select-String -path \"${PROJECT_SOURCE_DIR}\\..\\configure.ac\" -pattern 'AC_INIT\\(libgdiplus, \\[(.*)\\]').Matches[0].Groups[1].Value | Set-Content \"${PROJECT_SOURCE_DIR}\\..\\config.h\""
 	VERBATIM
 )
