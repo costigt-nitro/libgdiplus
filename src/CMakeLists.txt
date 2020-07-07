@@ -6,7 +6,7 @@ set(CMAKE_CONFIGURATION_TYPES "Debug;Release"
     CACHE STRING "Configuration types" FORCE)
 
 add_library(libgdiplus SHARED
-  ../config.h
+  config.h
   adjustablearrowcap.c
   adjustablearrowcap.h
   adjustablearrowcap-private.h
@@ -166,5 +166,5 @@ set_property(TARGET libgdiplus
 )
 
 execute_process(
-	COMMAND powershell.exe -NonInteractive -Command "(Get-Content \"${PROJECT_SOURCE_DIR}\\..\\winconfig.h.in\") -replace '#LIBGDIPLUS_VERSION#', (Select-String -path \"${PROJECT_SOURCE_DIR}\\..\\configure.ac\" -pattern 'AC_INIT\\(libgdiplus, \\[(.*)\\]').Matches[0].Groups[1].Value | Set-Content \"${PROJECT_SOURCE_DIR}\\..\\config.h\""
+	COMMAND powershell.exe -NonInteractive -Command "(Get-Content \"${PROJECT_SOURCE_DIR}\\..\\winconfig.h.in\") -replace '#LIBGDIPLUS_VERSION#', (Select-String -path \"${PROJECT_SOURCE_DIR}\\..\\configure.ac\" -pattern 'AC_INIT\\(libgdiplus, \\[(.*)\\]').Matches[0].Groups[1].Value | Set-Content \"${PROJECT_SOURCE_DIR}\\config.h\""
 )
