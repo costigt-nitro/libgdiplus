@@ -128,42 +128,6 @@ add_library(libgdiplus SHARED
   wmfcodec.c
   wmfcodec.h
 )
-# Additional include directories
-set_property(TARGET libgdiplus
-  APPEND PROPERTY INCLUDE_DIRECTORIES
-  $<$<CONFIG:Debug>:
-    ${CMAKE_SOURCE_DIR}>
-  $<$<CONFIG:Release>:
-    ${CMAKE_SOURCE_DIR}>
-)
-
-# Preprocessor definitions
-target_compile_definitions(libgdiplus PRIVATE
-  $<$<CONFIG:Debug>:_MBCS;HAVE_LIBGIF;HAVE_LIBJPEG;HAVE_LIBTIFF;HAVE_LIBPNG;HAVE_FCFINI;USE_PANGO_RENDERING;_WINDLL;WIN32>
-  $<$<CONFIG:Release>:_MBCS;HAVE_LIBGIF;HAVE_LIBJPEG;HAVE_LIBTIFF;HAVE_LIBPNG;HAVE_FCFINI;USE_PANGO_RENDERING;_WINDLL;WIN32>
-)
-
-# Minimal rebuild
-if (MSVC)
-  target_compile_options(libgdiplus PRIVATE
-    "$<$<CONFIG:Debug>:/Gm->"
-    "$<$<CONFIG:Release>:/Gm->"
-  )
-endif ()
-
-# Precompiled header files
-if (MSVC)
-  target_compile_options(libgdiplus PRIVATE
-    ""
-  )
-endif ()
-
-# Link libraries
-set_property(TARGET libgdiplus
-  APPEND PROPERTY LINK_LIBRARIES
-  "$<$<CONFIG:Debug>:shcore.lib>"
-  "$<$<CONFIG:Release>:shcore.lib>"
-)
 
 execute_process(
 	COMMAND powershell.exe -NonInteractive -Command "(Get-Content \"${PROJECT_SOURCE_DIR}\\..\\winconfig.h.in\") -replace '#LIBGDIPLUS_VERSION#', (Select-String -path \"${PROJECT_SOURCE_DIR}\\..\\configure.ac\" -pattern 'AC_INIT\\(libgdiplus, \\[(.*)\\]').Matches[0].Groups[1].Value | Set-Content \"${PROJECT_SOURCE_DIR}\\config.h\""
