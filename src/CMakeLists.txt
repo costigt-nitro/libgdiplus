@@ -5,7 +5,7 @@ project(libgdiplus)
 set(CMAKE_CONFIGURATION_TYPES "Debug;Release"
     CACHE STRING "Configuration types" FORCE)
 
-add_library(libgdiplus SHARED
+add_library(libgdiplus STATIC
   config.h
   adjustablearrowcap.c
   adjustablearrowcap.h
